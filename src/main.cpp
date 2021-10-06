@@ -1,9 +1,9 @@
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
-/*    Author:       ryan                                                      */
+/*    Author:       Avengineers                                               */
 /*    Created:      Tue Oct 05 2021                                           */
-/*    Description:  V5 project                                                */
+/*    Description:  Avengineers V Team Tipping Point Competition Code Main    */
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
