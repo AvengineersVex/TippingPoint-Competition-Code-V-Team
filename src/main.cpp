@@ -8,6 +8,9 @@
 /*----------------------------------------------------------------------------*/
 
 // ---- START VEXCODE CONFIGURED DEVICES ----
+// LeftMovement         motor         1               
+// RightMovement        motor         2
+// Controller1          controller
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
