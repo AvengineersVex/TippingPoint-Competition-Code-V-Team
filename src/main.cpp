@@ -17,8 +17,26 @@
 
 using namespace vex;
 
+// A global instance of competition
+competition Competition;
+
+void autonomous(void) {
+
+}
+
+void usercontrol(void) {
+  
+}
+
 int main() {
+  Competition.autonomous(autonomous);
+  Competition.drivercontrol(usercontrol);
+
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-  
+
+  // Prevent main from exiting with an infinite loop.
+  while (true) {
+    wait(100, msec);
+  }
 }
