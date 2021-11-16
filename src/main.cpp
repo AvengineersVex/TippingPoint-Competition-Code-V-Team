@@ -51,3 +51,31 @@ int main() {
     wait(100, msec);
   }
 }
+
+void go_forward() {
+  RightDrive.setVelocity(100, velocityUnits::pct);
+  LeftDrive.setVelocity(100, velocityUnits::pct);
+  RightDrive.spin(directionType::fwd);
+  LeftDrive.spin(directionType::rev);
+}
+void go_backward() {
+  RightDrive.setVelocity(100, velocityUnits::pct);
+  LeftDrive.setVelocity(100, velocityUnits::pct);
+  RightDrive.spin(directionType::rev);
+  LeftDrive.spin(directionType::fwd);
+}
+
+void turn_left() {
+  RightDrive.setVelocity(100, velocityUnits::pct);
+  LeftDrive.setVelocity(100, velocityUnits::pct);
+  RightDrive.spin(directionType::fwd);
+  LeftDrive.spin(directionType::fwd);
+}
+void turn_right() {
+  RightDrive.setVelocity(100, velocityUnits::pct);
+  LeftDrive.setVelocity(100, velocityUnits::pct);
+  RightDrive.spin(directionType::rev);
+  LeftDrive.spin(directionType::rev);
+}
+
+
