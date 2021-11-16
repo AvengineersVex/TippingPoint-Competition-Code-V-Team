@@ -14,6 +14,7 @@
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
+#include "drive.h"
 
 using namespace vex;
 
@@ -31,7 +32,10 @@ void autonomous(void) {
 }
 
 void usercontrol(void) {
-  
+  while (1) {
+    mainDrive();
+    wait(20, msec);
+  }
 }
 
 int main() {
