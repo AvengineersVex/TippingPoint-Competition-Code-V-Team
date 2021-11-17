@@ -78,4 +78,7 @@ void turn_right() {
   LeftDrive.spin(directionType::rev);
 }
 
-
+void stop() {
+  LeftMotor.stop();
+  RightMotor.stop();
+}
