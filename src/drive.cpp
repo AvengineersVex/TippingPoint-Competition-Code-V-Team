@@ -38,3 +38,53 @@ int mainDrive() {
   }
   return 0;
 }
+
+void goForward() {
+  RightDrive.setVelocity(100, velocityUnits::pct);
+  LeftDrive.setVelocity(100, velocityUnits::pct);
+  RightDrive.spin(directionType::fwd);
+  LeftDrive.spin(directionType::rev);
+}
+
+void goBackward() {
+  RightDrive.setVelocity(100, velocityUnits::pct);
+  LeftDrive.setVelocity(100, velocityUnits::pct);
+  RightDrive.spin(directionType::rev);
+  LeftDrive.spin(directionType::fwd);
+}
+
+void turnLeft() {
+  RightDrive.setVelocity(100, velocityUnits::pct);
+  LeftDrive.setVelocity(100, velocityUnits::pct);
+  RightDrive.spin(directionType::fwd);
+  LeftDrive.spin(directionType::fwd);
+}
+
+void turnRight() {
+  RightDrive.setVelocity(100, velocityUnits::pct);
+  LeftDrive.setVelocity(100, velocityUnits::pct);
+  RightDrive.spin(directionType::rev);
+  LeftDrive.spin(directionType::rev);
+}
+
+void stop() {
+  LeftDrive.stop();
+  RightDrive.stop();
+}
+
+double inchesToDegrees(double inches) {
+  return
+   (inches / // for the ratio thing
+    (4 * 3.14)) * // cirmcuerfence
+    360; // convert to degres
+}
+
+void forwardInches(double inches) {
+  LeftDrive.startRotateTo(inchesToDegrees(inches), rotationUnits::deg);
+  RightDrive.startRotateTo(inchesToDegrees(inches), rotationUnits::deg);
+}
+
+void backwardInches(double inches) {
+  LeftDrive.startRotateTo(-1 * inchesToDegrees(inches), rotationUnits::deg);
+  RightDrive.startRotateTo(-1 * inchesToDegrees(inches), rotationUnits::deg);
+}
