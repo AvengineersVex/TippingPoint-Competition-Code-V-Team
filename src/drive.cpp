@@ -20,6 +20,27 @@ int mainDrive() {
   return 0;
 }
 
+int oneJoystickDrive() {
+  RightDrive.spin(fwd);
+  LeftDrive.spin(fwd);
+  while (true) {
+    while (abs(Controller1.Axis3.value()) < 20) {
+      RightDrive.setVelocity(-Controller1.Axis4.value() + 27, velocityUnits::pct);
+      LeftDrive.setVelocity(Controller1.Axis4.value() + 27, velocityUnits::pct);
+    }
+    while (Controller1.Axis4.value() > 0) {
+      RightDrive.setVelocity((Controller1.Axis3.value() - Controller1.Axis4.value()), velocityUnits::pct);
+      LeftDrive.setVelocity(Controller1.Axis3.value(), velocityUnits::pct);
+    }
+    while (Controller1.Axis4.value() < 0) {
+      RightDrive.setVelocity(Controller1.Axis3.value(), velocityUnits::pct);
+      LeftDrive.setVelocity((Controller1.Axis3.value() - Controller1.Axis4.value()), velocityUnits::pct);
+    } 
+    wait(20, msec);
+  }
+  return 0;
+}
+
 void goForward() {
   RightDrive.setVelocity(100, velocityUnits::pct);
   LeftDrive.setVelocity(100, velocityUnits::pct);
