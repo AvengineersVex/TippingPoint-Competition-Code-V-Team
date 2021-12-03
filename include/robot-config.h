@@ -5,6 +5,11 @@ extern brain Brain;
 // VEXcode devices
 extern motor LeftDrive;
 extern motor RightDrive;
+extern motor RingIntake;
+extern motor Conveyor;
+extern motor TowerLift;
+extern motor TowerIntakeFront;
+extern motor TowerIntakeBack;
 
 extern controller Controller1;
 
