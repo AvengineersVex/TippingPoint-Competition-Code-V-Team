@@ -10,12 +10,17 @@
 ## Motors
 1. LeftDrive
 2. RightDrive
+3. RingIntake
+4. Conveyor
+5. TowerLift
+6. TowerIntakeFront
+7. TowerIntakeBack
 
 ## Guidelines
 1. All code must have comments before submitting a pull request.
-2. Do not merge a pull request without approval from the rest of the team.
+2. Do not merge a pull request without approval from the majority of the team.
 3. All variable names must make sense in context and to any other team.
-4. ALl variables and functions must use camelCase (aka thisIsMyVariableName)
+4. All variables and functions must use camel case (ex. "thisIsMyVariableName").
 5. All problems should be resolved within a programming team before going to someone else.
 6. VEXcode V5 Pro must be used for all Avengineers team programming.
 7. All team programming communication must go through Slack or in person/Zoom (if applicable).
