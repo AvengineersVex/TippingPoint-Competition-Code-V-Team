@@ -5,38 +5,36 @@ extern controller Controller1;
 extern motor RightDrive;
 extern motor LeftDrive;
 
-int mainDrive() {
+int twoJoystickDrive() {
   RightDrive.spin(fwd);
   LeftDrive.spin(fwd);
   while (true) {
-    while (abs(Controller1.Axis1.value()) > 20) {
+    while (abs(Controller1.Axis1.value()) > 20) { // rotating
       RightDrive.setVelocity(-Controller1.Axis1.value() + 27, velocityUnits::pct);
       LeftDrive.setVelocity(Controller1.Axis1.value() + 27, velocityUnits::pct);
     }
-  RightDrive.setVelocity(Controller1.Axis3.value(), velocityUnits::pct);
+  RightDrive.setVelocity(Controller1.Axis3.value(), velocityUnits::pct); // going forward and back
   LeftDrive.setVelocity(Controller1.Axis3.value(), velocityUnits::pct);
   wait(20, msec);
   }
   return 0;
 }
 
-int oneJoystickDrive() {
+int mainDrive() { // one joystick
+  RightDrive.setVelocity(0, velocityUnits::pct);
+  LeftDrive.setVelocity(0, velocityUnits::pct);
   RightDrive.spin(fwd);
   LeftDrive.spin(fwd);
-  while (true) {
-    while (abs(Controller1.Axis3.value()) < 20) {
-      RightDrive.setVelocity(-Controller1.Axis4.value() + 27, velocityUnits::pct);
-      LeftDrive.setVelocity(Controller1.Axis4.value() + 27, velocityUnits::pct);
+  while (true) { // loop forever
+    if (abs(Controller1.Axis3.value()) < 20) { // rotating on the spot
+      RightDrive.setVelocity(-Controller1.Axis4.position(), velocityUnits::pct); // right motor is negated because it needs to go in the opposite direction to turn on the spot
+      LeftDrive.setVelocity(Controller1.Axis4.position(), velocityUnits::pct);
     }
-    while (Controller1.Axis4.value() > 0) {
-      RightDrive.setVelocity((Controller1.Axis3.value() - Controller1.Axis4.value()), velocityUnits::pct);
-      LeftDrive.setVelocity(Controller1.Axis3.value(), velocityUnits::pct);
+    else { // moving forward or back
+      RightDrive.setVelocity(Controller1.Axis3.position(), velocityUnits::pct); // left and right motor go in the same direction
+      LeftDrive.setVelocity(Controller1.Axis3.position(), velocityUnits::pct); 
     }
-    while (Controller1.Axis4.value() < 0) {
-      RightDrive.setVelocity(Controller1.Axis3.value(), velocityUnits::pct);
-      LeftDrive.setVelocity((Controller1.Axis3.value() - Controller1.Axis4.value()), velocityUnits::pct);
-    } 
-    wait(20, msec);
+    wait(20, msec); // some delay to prevent updating too fast. (wasted resources)
   }
   return 0;
 }
