@@ -9,7 +9,12 @@
 
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // LeftMovement         motor         1               
-// RightMovement        motor         2
+// RightMovement        motor         2               
+// RingIntake           motor         3               
+// Conveyor             motor         4               
+// TowerLift            motor         5               
+// TowerIntakeFront     motor         6               
+// TowerIntakeBack      motor         7
 // Controller1          controller
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
