@@ -27,15 +27,14 @@ bool frontLatchClosed = false;
 bool backLatchClosed = false;
 
 void frontLatch() {
-  std::cout << "pressed";
   if (TowerIntakeFront.isSpinning()) {
     return;
   }
 
   if (frontLatchClosed) {
-    TowerIntakeFront.spinFor(directionType::fwd, 500, timeUnits::msec);
+    TowerIntakeFront.spinFor(directionType::fwd, 100, timeUnits::msec);
   } else {
-    TowerIntakeFront.spinFor(directionType::rev, 500, timeUnits::msec);
+    TowerIntakeFront.spinFor(directionType::rev, 100, timeUnits::msec);
   }
   frontLatchClosed = ! frontLatchClosed;
 }
@@ -46,17 +45,17 @@ void backLatch() {
   }
 
   if (backLatchClosed) {
-    TowerIntakeBack.spinFor(directionType::fwd, 1, timeUnits::msec);
+    TowerIntakeBack.spinFor(directionType::fwd, 100, timeUnits::msec);
   } else {
-    TowerIntakeBack.spinFor(directionType::rev, 1, timeUnits::msec);
+    TowerIntakeBack.spinFor(directionType::rev, 100, timeUnits::msec);
   }
 
   backLatchClosed = ! backLatchClosed;
 }
 
 void setupLatchMotors(controller::button FrontButton, controller::button BackButton) {
-  TowerIntakeFront.setVelocity(100, velocityUnits::pct);
-  TowerIntakeBack.setVelocity(100, velocityUnits::pct);
+  TowerIntakeFront.setVelocity(200, velocityUnits::pct);
+  TowerIntakeBack.setVelocity(200, velocityUnits::pct);
   TowerIntakeFront.stop();
   TowerIntakeBack.stop();
   FrontButton.pressed(frontLatch);
