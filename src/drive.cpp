@@ -1,9 +1,14 @@
 #include "vex.h"
-
+#include "control.h"
+//#include <cstdio>
 using namespace vex;
 extern controller Controller1;
 extern motor RightDrive;
 extern motor LeftDrive;
+extern motor Conveyor;
+extern motor TowerIntakeFront;
+
+
 
 int twoJoystickDrive() {
   RightDrive.spin(fwd);
@@ -23,8 +28,15 @@ int twoJoystickDrive() {
 int mainDrive() { // one joystick
   RightDrive.setVelocity(0, velocityUnits::pct);
   LeftDrive.setVelocity(0, velocityUnits::pct);
+  Conveyor.setVelocity(100, velocityUnits::pct);
   RightDrive.spin(fwd);
   LeftDrive.spin(fwd);
+
+  // set up various motors
+  //printf("Setting up motors");
+  setupConveyorMotor(Controller1.ButtonR1);
+  setupLatchMotors(Controller1.ButtonL1, Controller1.ButtonL2);
+  setupTowerMotors();
   while (true) { // loop forever
     if (abs(Controller1.Axis3.value()) < 20) { // rotating on the spot
       RightDrive.setVelocity(-Controller1.Axis4.position(), velocityUnits::pct); // right motor is negated because it needs to go in the opposite direction to turn on the spot
@@ -34,42 +46,11 @@ int mainDrive() { // one joystick
       RightDrive.setVelocity(Controller1.Axis3.position(), velocityUnits::pct); // left and right motor go in the same direction
       LeftDrive.setVelocity(Controller1.Axis3.position(), velocityUnits::pct); 
     }
+
+    updateTowerMotors(Controller1.Axis2);
     wait(20, msec); // some delay to prevent updating too fast. (wasted resources)
   }
   return 0;
-}
-
-void goForward() {
-  RightDrive.setVelocity(100, velocityUnits::pct);
-  LeftDrive.setVelocity(100, velocityUnits::pct);
-  RightDrive.spin(directionType::fwd);
-  LeftDrive.spin(directionType::rev);
-}
-
-void goBackward() {
-  RightDrive.setVelocity(100, velocityUnits::pct);
-  LeftDrive.setVelocity(100, velocityUnits::pct);
-  RightDrive.spin(directionType::rev);
-  LeftDrive.spin(directionType::fwd);
-}
-
-void turnLeft() {
-  RightDrive.setVelocity(100, velocityUnits::pct);
-  LeftDrive.setVelocity(100, velocityUnits::pct);
-  RightDrive.spin(directionType::fwd);
-  LeftDrive.spin(directionType::fwd);
-}
-
-void turnRight() {
-  RightDrive.setVelocity(100, velocityUnits::pct);
-  LeftDrive.setVelocity(100, velocityUnits::pct);
-  RightDrive.spin(directionType::rev);
-  LeftDrive.spin(directionType::rev);
-}
-
-void stop() {
-  LeftDrive.stop();
-  RightDrive.stop();
 }
 
 double inchesToDegrees(double inches) {
@@ -77,14 +58,4 @@ double inchesToDegrees(double inches) {
    (inches / // for the ratio thing
     (4 * 3.14)) * // cirmcuerfence
     360; // convert to degres
-}
-
-void forwardInches(double inches) {
-  LeftDrive.startRotateTo(inchesToDegrees(inches), rotationUnits::deg);
-  RightDrive.startRotateTo(inchesToDegrees(inches), rotationUnits::deg);
-}
-
-void backwardInches(double inches) {
-  LeftDrive.startRotateTo(-1 * inchesToDegrees(inches), rotationUnits::deg);
-  RightDrive.startRotateTo(-1 * inchesToDegrees(inches), rotationUnits::deg);
 }
