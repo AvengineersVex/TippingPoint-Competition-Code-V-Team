@@ -1,5 +1,4 @@
 #include "vex.h"
-#include "control.h"
 //#include <cstdio>
 using namespace vex;
 extern controller Controller1;
@@ -32,11 +31,6 @@ int mainDrive() { // one joystick
   RightDrive.spin(fwd);
   LeftDrive.spin(fwd);
 
-  // set up various motors
-  //printf("Setting up motors");
-  setupConveyorMotor(Controller1.ButtonR1);
-  setupLatchMotors(Controller1.ButtonL1, Controller1.ButtonL2);
-  setupTowerMotors();
   while (true) { // loop forever
     if (abs(Controller1.Axis3.value()) < 20) { // rotating on the spot
       RightDrive.setVelocity(-Controller1.Axis4.position(), velocityUnits::pct); // right motor is negated because it needs to go in the opposite direction to turn on the spot
@@ -48,7 +42,7 @@ int mainDrive() { // one joystick
     }
 
     updateTowerMotors(Controller1.Axis2);
-    wait(20, msec); // some delay to prevent updating too fast. (wasted resources)
+    wait(20, msec); // some delay to prevent wasted resources
   }
   return 0;
 }
