@@ -1,5 +1,4 @@
 #include "vex.h"
-#include <iostream>
 using namespace vex;
 extern controller Controller1;
 extern motor RightDrive;
@@ -27,30 +26,28 @@ bool frontLatchClosed = false;
 bool backLatchClosed = false;
 
 void frontLatch() {
-  if (TowerIntakeFront.isSpinning()) {
-    return;
+  TowerIntakeFront.spin(fwd);
+  if (TowerIntakeFront.isDone()) {
+    if (frontLatchClosed) {
+      TowerIntakeFront.spinFor(directionType::fwd, 500, timeUnits::msec);
+    } else {
+      TowerIntakeFront.spinFor(directionType::rev, 500, timeUnits::msec);
+    }
+    frontLatchClosed = ! frontLatchClosed;
   }
-
-  if (frontLatchClosed) {
-    TowerIntakeFront.spinFor(directionType::fwd, 100, timeUnits::msec);
-  } else {
-    TowerIntakeFront.spinFor(directionType::rev, 100, timeUnits::msec);
-  }
-  frontLatchClosed = ! frontLatchClosed;
 }
 
 void backLatch() {
-  if (TowerIntakeBack.isSpinning()) {
-    return;
-  }
+  TowerIntakeBack.spin(fwd);
+  if (TowerIntakeBack.isDone()) {   
+    if (backLatchClosed) {
+      TowerIntakeBack.spinFor(directionType::fwd, 50, timeUnits::msec);
+    } else {
+      TowerIntakeBack.spinFor(directionType::rev, 50, timeUnits::msec);
+    }
 
-  if (backLatchClosed) {
-    TowerIntakeBack.spinFor(directionType::fwd, 100, timeUnits::msec);
-  } else {
-    TowerIntakeBack.spinFor(directionType::rev, 100, timeUnits::msec);
-  }
-
-  backLatchClosed = ! backLatchClosed;
+    backLatchClosed = ! backLatchClosed;
+    }
 }
 
 void setupLatchMotors(controller::button FrontButton, controller::button BackButton) {
@@ -63,24 +60,22 @@ void setupLatchMotors(controller::button FrontButton, controller::button BackBut
 }
 
 double minArmRotation = 0;
-double maxArmRotation = 60;
+double maxArmRotation = 155;
 
 
 
 void setupTowerMotors() {
+  TowerLift.setVelocity(30, pct);
   TowerLift.rotateTo(minArmRotation, deg);
+  TowerLift.resetRotation();
 }
 
 void updateTowerMotors(controller::axis Axis) {
-  if (Axis.value() > 20) {
-    TowerLift.spin(directionType::fwd);
-  } else if (Axis.value() < 20) {
-    TowerLift.spin(directionType::rev);
-  }
-
-  if (TowerLift.rotation(deg) > minArmRotation) {
-    TowerLift.rotateTo(minArmRotation, deg);
-  } else if (TowerLift.rotation(deg) > maxArmRotation) {
-    TowerLift.rotateTo(maxArmRotation, deg);
+  if (Axis.position() > 20) {
+    TowerLift.startRotateTo(maxArmRotation, deg);
+  } else if (Axis.position() < -20) {
+    TowerLift.startRotateTo(minArmRotation, deg);
+  } else {
+    TowerLift.stop();
   }
 }
