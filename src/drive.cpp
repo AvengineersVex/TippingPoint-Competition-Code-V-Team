@@ -30,10 +30,7 @@ int mainDrive() { // one joystick
   Conveyor.setVelocity(100, velocityUnits::pct);
   RightDrive.spin(fwd);
   LeftDrive.spin(fwd);
-  // set up various motors
-  setupConveyorMotor(Controller1.ButtonR1);
-  setupLatchMotors(Controller1.ButtonLeft, Controller1.ButtonRight);
-  setupTowerMotors();
+  
   while (true) { // loop forever
     if (abs(Controller1.Axis3.value()) < 20) { // rotating on the spot
       RightDrive.setVelocity(-Controller1.Axis4.position(), velocityUnits::pct); // right motor is negated because it needs to go in the opposite direction to turn on the spot
