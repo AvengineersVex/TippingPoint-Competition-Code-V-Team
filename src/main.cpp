@@ -8,8 +8,8 @@
 /*----------------------------------------------------------------------------*/
 
 // ---- START VEXCODE CONFIGURED DEVICES ----
-// LeftMovement         motor         1               
-// RightMovement        motor         2               
+// LeftDrive            motor         1               
+// RightDrive           motor         2               
 // RingIntake           motor         3               
 // Conveyor             motor         4               
 // TowerLift            motor         5               
@@ -39,9 +39,8 @@ void autonomous(void) {
 
 void usercontrol(void) {
   while (1) {
-    setupConveyorMotor(Controller1.ButtonR1);
-    setupLatchMotors(Controller1.ButtonL1, Controller1.ButtonL2);
-    setupTowerMotors();
+    // setupLatchMotors(Controller1.ButtonL1, Controller1.ButtonL2);
+    // setupTowerMotors();
     mainDrive();
     wait(20, msec);
   }

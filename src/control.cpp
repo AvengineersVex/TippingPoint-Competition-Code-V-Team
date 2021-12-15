@@ -10,11 +10,8 @@ extern motor TowerIntakeBack;
 
 
 void conveyor() {
-  if (Conveyor.isSpinning()) {
-    Conveyor.stop();
-  } else {
-    Conveyor.spin(fwd);
-  }
+  Conveyor.setVelocity(100, pct);
+  Conveyor.spin(fwd);
 }
 
 void setupConveyorMotor(controller::button Button) {
