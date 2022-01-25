@@ -48,16 +48,16 @@ void backLatch() {
 }
 
 void setupLatchMotors(controller::button FrontButton, controller::button BackButton) {
-  TowerIntakeFront.setVelocity(200, velocityUnits::pct);
-  TowerIntakeBack.setVelocity(200, velocityUnits::pct);
+  TowerIntakeFront.setVelocity(30, velocityUnits::pct);
+  TowerIntakeBack.setVelocity(30, velocityUnits::pct);
   TowerIntakeFront.stop();
   TowerIntakeBack.stop();
   FrontButton.pressed(frontLatch);
   BackButton.pressed(backLatch);
 }
 
-double minArmRotation = 0;
-double maxArmRotation = 155;
+double minArmRotation = 40;
+double maxArmRotation = 50;
 
 
 

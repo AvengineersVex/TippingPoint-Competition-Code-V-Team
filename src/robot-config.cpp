@@ -11,9 +11,9 @@ brain Brain;
 motor LeftDrive = motor(PORT1, ratio18_1, false);
 motor RightDrive = motor(PORT2, ratio18_1, true);
 motor RingIntake = motor(PORT3, ratio6_1, true);
-motor Conveyor = motor(PORT4, ratio6_1, true);
+motor Conveyor = motor(PORT4, ratio6_1, false);
 motor TowerLift = motor(PORT5, ratio36_1, true);
-motor TowerIntakeFront = motor(PORT6, ratio6_1, true);
+motor TowerIntakeFront = motor(PORT6, ratio6_1, false);
 motor TowerIntakeBack = motor(PORT7, ratio6_1, true);
 
 controller Controller1 = controller(primary);
