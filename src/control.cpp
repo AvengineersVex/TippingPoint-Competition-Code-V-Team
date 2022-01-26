@@ -19,8 +19,8 @@ void setupConveyorMotor(controller::button Button) {
   Button.pressed(conveyor);
 }
 
-bool frontLatchClosed = false;
-bool backLatchClosed = false;
+bool frontLatchClosed;
+bool backLatchClosed;
 
 void frontLatch() {
   TowerIntakeFront.spin(fwd);
@@ -48,6 +48,7 @@ void backLatch() {
 }
 
 void setupLatchMotors(controller::button FrontButton, controller::button BackButton) {
+  frontLatchClosed = true;
   TowerIntakeFront.setVelocity(30, velocityUnits::pct);
   TowerIntakeBack.setVelocity(30, velocityUnits::pct);
   TowerIntakeFront.stop();

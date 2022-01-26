@@ -40,7 +40,6 @@ void autonomous(void) {
 void usercontrol(void) {
   while (1) {
     setupLatchMotors(Controller1.ButtonL1, Controller1.ButtonL2);
-    // setupTowerMotors();
     mainDrive();
     wait(20, msec);
   }
