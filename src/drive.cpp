@@ -13,29 +13,29 @@ int mainDrive() { // one joystick
   RightDrive.setVelocity(0, velocityUnits::pct);
   LeftDrive.setVelocity(0, velocityUnits::pct);
   Conveyor.setVelocity(0, velocityUnits::pct);
+  RingIntakeRight.setVelocity(100, velocityUnits::pct);
+  RingIntakeLeft.setVelocity(100, velocityUnits::pct);
   RightDrive.spin(fwd);
   LeftDrive.spin(fwd);
   Conveyor.spin(directionType::rev);
   
   while (true) { // loop forever
 
+
+    RingIntakeRight.spin(directionType::fwd);
+    RingIntakeLeft.spin(directionType::fwd);
+
     // conveyor
     if ((abs(Controller1.Axis3.value()) > 20 || abs(Controller1.Axis4.value()) > 20) && Controller1.ButtonDown.pressing()) { // reverse
       Conveyor.setVelocity(15, velocityUnits::pct);
       Conveyor.spin(directionType::rev);
-      RingIntakeRight.setVelocity(100, velocityUnits::pct);
-      RingIntakeLeft.setVelocity(100, velocityUnits::pct);
-      RingIntakeRight.spin(directionType::rev);
-      RingIntakeLeft.spin(directionType::rev);
     } else if ((abs(Controller1.Axis3.value()) > 20 || abs(Controller1.Axis4.value()) > 20)) { // regular direction
-      Conveyor.setVelocity(100, velocityUnits::pct);
+      Conveyor.setVelocity(15, velocityUnits::pct);
       Conveyor.spin(directionType::fwd);
-      RingIntakeRight.setVelocity(100, velocityUnits::pct);
-      RingIntakeLeft.setVelocity(100, velocityUnits::pct);
-      RingIntakeRight.spin(directionType::fwd);
-      RingIntakeLeft.spin(directionType::fwd);
     } else { // not moving
       Conveyor.setVelocity(0, velocityUnits::pct);
+      RingIntakeRight.stop();
+      RingIntakeLeft.stop();
     }
 
     if (abs(Controller1.Axis3.value()) < 20) { // rotating on the spot

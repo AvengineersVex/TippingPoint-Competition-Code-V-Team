@@ -26,9 +26,9 @@ void frontLatch() {
   TowerIntakeFront.spin(fwd);
   if (TowerIntakeFront.isDone()) {
     if (frontLatchClosed) {
-      TowerIntakeFront.spinFor(directionType::fwd, 500, timeUnits::msec);
+      TowerIntakeFront.spinFor(directionType::fwd, 400, timeUnits::msec);
     } else {
-      TowerIntakeFront.spinFor(directionType::rev, 500, timeUnits::msec);
+      TowerIntakeFront.spinFor(directionType::rev, 400, timeUnits::msec);
     }
     frontLatchClosed = ! frontLatchClosed;
   }
