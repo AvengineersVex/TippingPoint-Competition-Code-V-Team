@@ -10,6 +10,8 @@ extern motor Conveyor;
 extern motor TowerLift;
 extern motor TowerIntakeFront;
 extern motor TowerIntakeBack;
+extern motor RingIntakeRight;
+extern motor RingIntakeLeft;
 
 extern controller Controller1;
 
