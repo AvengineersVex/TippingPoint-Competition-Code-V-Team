@@ -1,0 +1,2 @@
+void rightAuton();
+void leftAuton();

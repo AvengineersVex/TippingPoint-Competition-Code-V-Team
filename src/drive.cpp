@@ -47,8 +47,6 @@ int mainDrive() { // one joystick
       RightDrive.setVelocity(Controller1.Axis3.position(), velocityUnits::pct); // left and right motor go in the same direction
       LeftDrive.setVelocity(Controller1.Axis3.position(), velocityUnits::pct); 
     }
-
-    updateTowerMotors(Controller1.Axis2);
     wait(20, msec); // some delay to prevent wasted resources
   }
   return 0;
@@ -119,4 +117,13 @@ void forwardInches(double inches) {
 void backwardInches(double inches) {
   LeftDrive.startRotateTo(-1 * inchesToDegrees(inches), rotationUnits::deg);
   RightDrive.startRotateTo(-1 * inchesToDegrees(inches), rotationUnits::deg);
-} 
+}
+
+void turnDegrees(double deg) {
+  double a = ((60 * 45)/deg) * (deg/360) * (94.0002221066) * (1/50.2654824574);  // exact rpm to move in degrees/45 seconds
+  LeftDrive.setVelocity((2 * a), velocityUnits::rpm);
+  RightDrive.setVelocity((2 * a), velocityUnits::rpm);
+  RightDrive.spin(forward);
+  wait((deg/90), sec);
+  RightDrive.setVelocity(0, velocityUnits::rpm);
+}
