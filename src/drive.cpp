@@ -27,10 +27,10 @@ int mainDrive() { // one joystick
 
     // conveyor
     if ((abs(Controller1.Axis3.value()) > 20 || abs(Controller1.Axis4.value()) > 20) && Controller1.ButtonDown.pressing()) { // reverse
-      Conveyor.setVelocity(15, velocityUnits::pct);
+      Conveyor.setVelocity(10, velocityUnits::pct);
       Conveyor.spin(directionType::rev);
     } else if ((abs(Controller1.Axis3.value()) > 20 || abs(Controller1.Axis4.value()) > 20)) { // regular direction
-      Conveyor.setVelocity(15, velocityUnits::pct);
+      Conveyor.setVelocity(10, velocityUnits::pct);
       Conveyor.spin(directionType::fwd);
     } else { // not moving
       Conveyor.setVelocity(0, velocityUnits::pct);
