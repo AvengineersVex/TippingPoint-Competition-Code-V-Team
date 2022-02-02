@@ -8,6 +8,7 @@ extern motor Conveyor;
 extern motor TowerIntakeFront;
 extern motor RingIntakeRight;
 extern motor RingIntakeLeft;
+extern motor Platform;
 
 int mainDrive() { // one joystick
   RightDrive.setVelocity(0, velocityUnits::pct);

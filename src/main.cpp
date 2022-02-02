@@ -10,11 +10,8 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // LeftDrive            motor         1               
 // RightDrive           motor         2               
-// RingIntake           motor         3               
-// Conveyor             motor         4               
-// TowerLift            motor         5               
-// TowerIntakeFront     motor         6               
-// TowerIntakeBack      motor         7
+// Conveyor             motor         4             
+// TowerIntakeFront     motor         6
 // Controller1          controller
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
@@ -39,7 +36,8 @@ void autonomous(void) {
 
 void usercontrol(void) {
   while (1) {
-    setupLatchMotors(Controller1.ButtonL1, Controller1.ButtonL2);
+    setupLatchMotors(Controller1.ButtonL1);
+    setupPlatform(Controller1.ButtonR1);
     mainDrive();
     wait(20, msec);
   }

@@ -7,17 +7,8 @@ extern motor Conveyor;
 extern motor TowerLift;
 extern motor TowerIntakeFront;
 extern motor TowerIntakeBack;
+extern motor Platform;
 
-
-void conveyor() {
-  Conveyor.setVelocity(100, pct);
-  Conveyor.spin(fwd);
-}
-
-void setupConveyorMotor(controller::button Button) {
-  Conveyor.stop();
-  Button.pressed(conveyor);
-}
 
 bool frontLatchClosed;
 bool backLatchClosed;
@@ -34,46 +25,33 @@ void frontLatch() {
   }
 }
 
-void backLatch() {
-  TowerIntakeBack.spin(fwd);
-  if (TowerIntakeBack.isDone()) {   
-    if (backLatchClosed) {
-      TowerIntakeBack.spinFor(directionType::fwd, 50, timeUnits::msec);
-    } else {
-      TowerIntakeBack.spinFor(directionType::rev, 50, timeUnits::msec);
-    }
-
-    backLatchClosed = ! backLatchClosed;
-    }
-}
-
-void setupLatchMotors(controller::button FrontButton, controller::button BackButton) {
+void setupLatchMotors(controller::button Button) {
   frontLatchClosed = true;
   TowerIntakeFront.setVelocity(30, velocityUnits::pct);
-  TowerIntakeBack.setVelocity(30, velocityUnits::pct);
   TowerIntakeFront.stop();
-  TowerIntakeBack.stop();
-  FrontButton.pressed(frontLatch);
-  BackButton.pressed(backLatch);
+  Button.pressed(frontLatch);
 }
 
-double minArmRotation = 40;
-double maxArmRotation = 50;
 
+bool platformDown;
 
-
-void setupTowerMotors() {
-  TowerLift.setVelocity(30, pct);
-  TowerLift.rotateTo(minArmRotation, deg);
-  TowerLift.resetRotation();
-}
-
-void updateTowerMotors(controller::axis Axis) {
-  if (Axis.position() > 20) {
-    TowerLift.startRotateTo(maxArmRotation, deg);
-  } else if (Axis.position() < -20) {
-    TowerLift.startRotateTo(minArmRotation, deg);
+void platform() {
+  if (platformDown) {
+    Platform.spin(directionType::fwd);
+    Platform.setVelocity(100, pct);
+    Platform.rotateTo(225, rotationUnits::deg);
+    Platform.setVelocity(0, pct);
   } else {
-    TowerLift.stop();
+    Platform.spin(directionType::rev);
+    Platform.setVelocity(100, pct);
+    Platform.rotateTo(225, rotationUnits::deg);
+    Platform.setVelocity(0, pct);
   }
+  platformDown = ! platformDown;
+}
+
+void setupPlatform(controller::button Button) {
+  platformDown = false;
+  Platform.stop();
+  Button.pressed(platform);
 }
