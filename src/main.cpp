@@ -11,7 +11,10 @@
 // LeftDrive            motor         1               
 // RightDrive           motor         2               
 // Conveyor             motor         4             
-// TowerIntakeFront     motor         6
+// TowerIntakeFront     motor         6             
+// RingIntakeRight      motor         8             
+// RingIntakeLeft       motor         9             
+// Platform             motor         10
 // Controller1          controller
 // ---- END VEXCODE CONFIGURED DEVICES ----
 

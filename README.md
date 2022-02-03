@@ -10,11 +10,11 @@
 ## Motors
 1. LeftDrive
 2. RightDrive
-3. RingIntake
 4. Conveyor
-5. TowerLift
 6. TowerIntakeFront
-7. TowerIntakeBack
+8. RingIntakeRight
+9. RingIntakeLeft
+10. Platform
 
 ## Guidelines
 1. All code must have comments before submitting a pull request.
