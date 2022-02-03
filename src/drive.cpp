@@ -1,5 +1,7 @@
 #include "vex.h"
 #include "control.h"
+#include <cmath>
+#include <math.h>
 using namespace vex;
 extern controller Controller1;
 extern motor RightDrive;
@@ -120,10 +122,16 @@ void backwardInches(double inches) {
 }
 
 void turnDegrees(double deg) {
-  double a = ((60 * 45)/deg) * (deg/360) * (94.0002221066) * (1/50.2654824574);  // exact rpm to move in degrees/45 seconds
-  LeftDrive.setVelocity((2 * a), velocityUnits::rpm);
-  RightDrive.setVelocity((2 * a), velocityUnits::rpm);
-  RightDrive.spin(forward);
-  wait((deg/90), sec);
+  const double width = 18;
+  const double length = 18;
+  const double circum = 12.5663706144;
+  double r = sqrt(pow(width, 2) + pow(length, 2)); // radius of the circle
+  double a = (deg * M_PI * r / 180) * (60) * (1 / circum);  // exact rpm to move in degrees/180 seconds
+  LeftDrive.setVelocity((a), velocityUnits::rpm);
+  RightDrive.setVelocity((-a), velocityUnits::rpm);
+  RightDrive.spin(directionType::fwd);
+  LeftDrive.spin(directionType::fwd);
+  wait((deg/180), sec);
   RightDrive.setVelocity(0, velocityUnits::rpm);
+  LeftDrive.setVelocity(0, velocityUnits::rpm);
 }
