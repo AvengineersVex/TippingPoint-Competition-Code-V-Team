@@ -18,6 +18,7 @@
 #include "vex.h"
 #include "drive.h"
 #include "control.h"
+#include "auton.h"
 
 using namespace vex;
 
@@ -31,7 +32,7 @@ void pre_auton(void) {
 }
 
 void autonomous(void) {
-
+  rightAuton();
 }
 
 void usercontrol(void) {
