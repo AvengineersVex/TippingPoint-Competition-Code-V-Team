@@ -36,22 +36,32 @@ void setupLatchMotors(controller::button Button) {
 bool platformDown;
 
 void platform() {
-  if (platformDown) {
-    Platform.spin(directionType::fwd);
-    Platform.setVelocity(100, pct);
-    Platform.rotateTo(225, rotationUnits::deg);
-    Platform.setVelocity(0, pct);
-  } else {
-    Platform.spin(directionType::rev);
-    Platform.setVelocity(100, pct);
-    Platform.rotateTo(225, rotationUnits::deg);
-    Platform.setVelocity(0, pct);
+  // if (platformDown) {
+  //   Platform.spin(directionType::fwd);
+  //   Platform.setVelocity(100, pct);
+  //   Platform.rotateTo(225, rotationUnits::deg);
+  //   Platform.setVelocity(0, pct);
+  // } else {
+  //   Platform.spin(directionType::fwd);
+  //   Platform.setVelocity(100, pct);
+  //   Platform.rotateTo(225, rotationUnits::deg);
+  //   Platform.setVelocity(0, pct);
+  // }
+  // platformDown = ! platformDown;
+  Platform.spin(fwd);
+  if (Platform.isDone()) {
+    if (platformDown) {
+      Platform.spinFor(directionType::fwd, 2000, timeUnits::msec);
+    } else {
+      Platform.spinFor(directionType::rev, 2000, timeUnits::msec);
+    }
+    platformDown = ! platformDown;
   }
-  platformDown = ! platformDown;
 }
 
 void setupPlatform(controller::button Button) {
   platformDown = false;
+  Platform.setVelocity(60, velocityUnits::pct);
   Platform.stop();
   Button.pressed(platform);
 }

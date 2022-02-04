@@ -16,18 +16,36 @@ const double circum = 12.5663706144;
 void rightAuton() {
   // RightDrive.rotateFor(directionType::fwd, ((double)48 / circum), rotationUnits::rev);
   // LeftDrive.rotateFor(directionType::fwd, ((double)48 / circum), rotationUnits::rev);
+  
   RightDrive.setVelocity(100, percentUnits::pct);
   LeftDrive.setVelocity(100, percentUnits::pct);
+
   backwardInches(48);
-  frontLatch();
+  TowerIntakeFront.spinFor(directionType::rev, 400, timeUnits::msec);
   turnDegrees(180);
-  backwardInches(48);
+  forwardInches(48);
   frontLatch();
   turnDegrees(120);
   backwardInches(15);
   frontLatch();
   forwardInches(10);
   Conveyor.spin(directionType::fwd);
+  while (true) {
+    wait(200, msec);
+  }
+  // RightDrive.spin(fwd);
+  // LeftDrive.spin(fwd);
+  // RightDrive.startSpinFor(fwd, inchesToDegrees(48), deg);
+  // LeftDrive.startSpinFor(fwd, inchesToDegrees(48), deg);
+  // while (RightDrive.isSpinning() | LeftDrive.isSpinning()) {
+  //   // pass
+  // }
+  // RightDrive.startSpinFor(directionType::rev, inchesToDegrees(48), deg);
+  // LeftDrive.startSpinFor(directionType::rev, inchesToDegrees(48), deg);
+  // while (RightDrive.isSpinning() | LeftDrive.isSpinning()) {
+  //   // pass
+  // }
+  // return; 
 }
 
 void leftAuton() {

@@ -112,18 +112,26 @@ void stop() {
 }
 
 void forwardInches(double inches) {
-  LeftDrive.startRotateTo(inchesToDegrees(inches), rotationUnits::deg);
-  RightDrive.startRotateTo(inchesToDegrees(inches), rotationUnits::deg);
+  LeftDrive.startRotateFor(fwd, inchesToDegrees(inches), rotationUnits::deg);
+  RightDrive.startRotateFor(fwd, inchesToDegrees(inches), rotationUnits::deg);
+  while (LeftDrive.isSpinning() || RightDrive.isSpinning()) { 
+    // pass
+  }
+  return;
 }
 
 void backwardInches(double inches) {
-  LeftDrive.startRotateTo(-1 * inchesToDegrees(inches), rotationUnits::deg);
-  RightDrive.startRotateTo(-1 * inchesToDegrees(inches), rotationUnits::deg);
+  LeftDrive.startRotateFor(directionType::rev, inchesToDegrees(inches), rotationUnits::deg);
+  RightDrive.startRotateFor(directionType::rev, inchesToDegrees(inches), rotationUnits::deg);
+  while (LeftDrive.isSpinning() || RightDrive.isSpinning()) { 
+    // pass
+  }
+  return;
 }
 
 void turnDegrees(double deg) {
-  const double width = 18;
-  const double length = 18;
+  const double width = 15.25;
+  const double length = 11.1;
   const double circum = 12.5663706144;
   double r = sqrt(pow(width, 2) + pow(length, 2)); // radius of the circle
   double a = (deg * M_PI * r / 180) * (60) * (1 / circum);  // exact rpm to move in degrees/180 seconds
