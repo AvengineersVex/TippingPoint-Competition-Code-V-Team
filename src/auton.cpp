@@ -13,18 +13,6 @@ extern motor Platform;
 
 const double circum = 12.5663706144;
 
-void auton() {
-  RightDrive.setVelocity(100, percentUnits::pct);
-  LeftDrive.setVelocity(100, percentUnits::pct);
-  TowerIntakeFront.setVelocity(30, percentUnits::pct);
-  Conveyor.setVelocity(10, percentUnits::pct);
-
-  backwardInches(18);
-  TowerIntakeFront.spinFor(directionType::rev, 400, timeUnits::msec);
-  forwardInches(18);
-  Conveyor.spin(directionType::fwd);
-}
-
 void rightAuton() {
   // RightDrive.rotateFor(directionType::fwd, ((double)48 / circum), rotationUnits::rev);
   // LeftDrive.rotateFor(directionType::fwd, ((double)48 / circum), rotationUnits::rev);

@@ -35,7 +35,7 @@ void pre_auton(void) {
 }
 
 void autonomous(void) {
-  auton();
+  rightAuton();
 }
 
 void usercontrol(void) {
