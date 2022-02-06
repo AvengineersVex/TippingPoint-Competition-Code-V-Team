@@ -10,7 +10,7 @@
 // ---- START VEXCODE CONFIGURED DEVICES ----
 // LeftDrive            motor         1               
 // RightDrive           motor         2               
-// Conveyor             motor         4             
+// Conveyor             motor         5             
 // TowerIntakeFront     motor         6             
 // RingIntakeRight      motor         8             
 // RingIntakeLeft       motor         9             
@@ -49,7 +49,7 @@ void usercontrol(void) {
 
 int main() {
   // Set up callbacks for autonomous and driver control periods.
-  Competition.autonomous(autonomous);
+  // Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
 
   // Run the pre-autonomous function.
